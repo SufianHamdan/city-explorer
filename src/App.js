@@ -1,8 +1,9 @@
 import React from 'react';
 import axios from 'axios';
-import 'bootstrap/dist/css/bootstrap.min.css';
-// import Form from 'react-bootstrap/Form';
-// import Button from 'react-bootstrap/Button';
+import Map from './components/Map';
+import Info from './components/Info';
+import Form from './components/Form';
+import WeatherData from './components/WeatherData';
 
 
 class App extends React.Component {
@@ -11,7 +12,8 @@ class App extends React.Component {
         this.state = {
             data: '',
             searchQuery:'',
-            show: false
+            show: false,
+            weatherData: ''
         };
     }
 
@@ -25,14 +27,15 @@ class App extends React.Component {
       try {
           
         event.preventDefault();
-        const url = `https://us1.locationiq.com/v1/search.php?key=pk.7bffc813ae6ef3ffe121f57e08e173dd&q=${this.state.searchQuery}&format=json`;
+        const url = `https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_MAP_KEY}&q=${this.state.searchQuery}&format=json`;
 
-        const weatherApi = await axios.get('http://localhost:3001');
+        const weatherApi = await axios.get(`${process.env.REACT_APP_SERVER}/weather`);
         console.log(weatherApi.data);
 
         const req = await axios.get(url);
         this.setState ({
-            data: req.data[0]           
+            data: req.data[0],
+            weatherData: weatherApi.data,         
         }); 
         console.log(req.data);
         console.log(this.state.data);
@@ -51,29 +54,25 @@ class App extends React.Component {
     render() { 
         return ( 
             <>
-            <h1>City Explorer</h1>
-            <form>
-            <label >Location:</label>
-            <input type="text" onChange={this.getCityName}/>
-            <button onClick={this.getLocationInfo}>Explore</button>
-            <p>{this.state.data.display_name}</p>
-            <p>{this.state.data.lat}</p>
-            <p>{this.state.data.lon}</p>
+            <h1>City Explorer</h1>            
+            <Form            
+                getLocationInfo = {this.getLocationInfo}
+                getCityName = {this.getCityName}
+            />
             { this.state.show && 
-                <>
-                <img src={`https://maps.locationiq.com/v3/staticmap?key=pk.7bffc813ae6ef3ffe121f57e08e173dd&center=${this.state.data.lat},${this.state.data.lon}&zoom=10`} alt="" width="300px"/>
-                </> }
-            
-            </form>
-
-
-             {/* <Form onSubmit={this.getLocationInfo}>
-                <Form.Label>Location</Form.Label>
-                <br />
-                <Form.Control type="text" placeholder="Enter location" onChange={this.getCityName} />
-                <Button variant="primary" type="submit" onClick={this.getData}>Explore</Button>
-            </Form> */}
-
+            <>
+            <Info
+                name = {this.state.data.display_name}
+            />            
+            <Map
+                loti = {this.state.data.lat}
+                long = {this.state.data.lon}
+            />
+            <WeatherData 
+                weatherInfo = {this.state.weatherData}
+            />
+            </>
+            } 
             </>
          ); 
     }

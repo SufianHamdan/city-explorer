@@ -22,12 +22,69 @@
 
 ---
 
-Name of feature: 
+### Lab 06:
 
-Estimate of time needed to complete: 
+Name of feature:
 
-Start time: 
+Estimate of time needed to complete:
 
-Finish time: 
+Start time:
 
-Actual time needed to complete: 
+Finish time:
+
+Actual time needed to complete:
+
+Inputs for the location data:
+
+1- GET Request: URL
+2- Key: API key
+3- queue: data
+
+Inputs for the static map data:
+
+1. GET Request: URL
+2. Key: API key
+3. lat: data
+4. lon: data
+
+Outline functions:
+
+1. Function that get the data from the user based on the location name then we pass the location name inside the url.
+
+2. Function that target the value that the user entered then pass it to the functiom that sends the GET Request URL.
+
+![WRRC](/assets/lab06)
+
+
+### Lab 06:
+
+Name of feature:
+
+Estimate of time needed to complete:
+
+Start time:
+
+Finish time:
+
+Actual time needed to complete:
+
+Inputs for the location data:
+
+1- GET Request: URL
+2- Key: API key
+3- queue: data
+
+Inputs for the static map data:
+
+1. GET Request: URL
+2. Key: API key
+3. lat: data
+4. lon: data
+
+Outline functions:
+
+1. Function that get the data from the user based on the location name then we pass the location name inside the url.
+
+2. Function that target the value that the user entered then pass it to the functiom that sends the GET Request URL.
+
+![WRRC](/assets/lab06)
