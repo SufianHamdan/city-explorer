@@ -27,6 +27,9 @@ class App extends React.Component {
         event.preventDefault();
         const url = `https://us1.locationiq.com/v1/search.php?key=pk.7bffc813ae6ef3ffe121f57e08e173dd&q=${this.state.searchQuery}&format=json`;
 
+        const weatherApi = await axios.get('http://localhost:3001');
+        console.log(weatherApi.data);
+
         const req = await axios.get(url);
         this.setState ({
             data: req.data[0]           
