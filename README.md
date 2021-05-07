@@ -24,49 +24,17 @@
 
 ### Lab 06:
 
-Name of feature:
+Parter: Aseet Hamamreh.
 
-Estimate of time needed to complete:
+Name of feature: Search for a city based on the latitude and longitude of that location then display a map of that city.
 
-Start time:
+Estimate of time needed to complete: 2 hours
 
-Finish time:
+Start time: 4:00
 
-Actual time needed to complete:
+Finish time: 9:00
 
-Inputs for the location data:
-
-1- GET Request: URL
-2- Key: API key
-3- queue: data
-
-Inputs for the static map data:
-
-1. GET Request: URL
-2. Key: API key
-3. lat: data
-4. lon: data
-
-Outline functions:
-
-1. Function that get the data from the user based on the location name then we pass the location name inside the url.
-
-2. Function that target the value that the user entered then pass it to the functiom that sends the GET Request URL.
-
-![WRRC](/assets/lab06)
-
-
-### Lab 06:
-
-Name of feature:
-
-Estimate of time needed to complete:
-
-Start time:
-
-Finish time:
-
-Actual time needed to complete:
+Actual time needed to complete: 5 hours
 
 Inputs for the location data:
 
@@ -87,4 +55,52 @@ Outline functions:
 
 2. Function that target the value that the user entered then pass it to the functiom that sends the GET Request URL.
 
-![WRRC](/assets/lab06)
+![WRRC](./assets/lab06)
+
+
+### Lab 07: 
+
+Name of feature: Display the weather info for the city that was searched for
+
+Estimate of time needed to complete: 2 hours
+
+Start time: 4:00
+
+Finish time: 9:00
+
+Actual time needed to complete: 5 hours
+
+Inputs for the weather info:
+
+1. GET Request: URL
+2. Key: API key
+3. City name: request query 
+
+Outline functions:
+
+1. Function that get the data from the user based on the location name then we pass the location name inside the url.
+
+
+### Lab 08: 
+
+Name of feature: Display the weather live info and the movies related to the city name for the city that was searched for
+
+Estimate of time needed to complete: 3 hours
+
+Start time: 4:00
+
+Finish time: 10:00
+
+Actual time needed to complete: 6 hours
+
+Inputs for the weather info:
+
+1. GET Request: URL
+2. Key: API key
+3. City name: request query
+
+Outline functions:
+
+1. Function that get the weather info from the user based on the location name then we pass the location name inside the url then request the city name from the server api url.
+
+2. Function that get the movies from the user based on the location name then we pass the location name inside the url then request the city name from the server api url.

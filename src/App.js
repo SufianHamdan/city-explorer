@@ -2,9 +2,10 @@ import React from 'react';
 import axios from 'axios';
 import Map from './components/Map';
 import Info from './components/Info';
-import Form from './components/Form';
+import Form from './components/cityForm';
 import WeatherData from './components/WeatherData';
-
+import Movies from './components/movies';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 class App extends React.Component {
     constructor(props){
@@ -13,7 +14,8 @@ class App extends React.Component {
             data: '',
             searchQuery:'',
             show: false,
-            weatherData: ''
+            weatherData: '',
+            moviesData: '',
         };
     }
 
@@ -23,38 +25,44 @@ class App extends React.Component {
     };
 
     getLocationInfo = async (event) => {
-    
-      try {
-          
+
         event.preventDefault();
         const url = `https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_MAP_KEY}&q=${this.state.searchQuery}&format=json`;
 
-        const weatherApi = await axios.get(`${process.env.REACT_APP_SERVER}/weather`);
-        console.log(weatherApi.data);
-
         const req = await axios.get(url);
         this.setState ({
-            data: req.data[0],
-            weatherData: weatherApi.data,         
+            data: req.data[0]                               
         }); 
         console.log(req.data);
         console.log(this.state.data);
-        
+     
+        this.getWeatherData();
+        this.getMoviesData();
+    };
+
+    getWeatherData = async () => {
+        const weatherApi = await axios.get(`${process.env.REACT_APP_SERVER}/weather?lat=${this.state.data.lat}&lon=${this.state.data.lon}`);
+        console.log(weatherApi.data);
+
         this.setState({
+            weatherData: weatherApi.data,
+            show: true  
+        });
+    }
+
+    getMoviesData = async () => {
+        const moviesApi = await axios.get(`${process.env.REACT_APP_SERVER}/movies?searchQuery=${this.state.searchQuery}`);
+        console.log(moviesApi);
+
+        this.setState ({
+            moviesData: moviesApi.data,
             show: true
         });
-      } catch (error) {
-        this.setState({
-            show: false
-            });
-      }
-
-    };
+    }
 
     render() { 
         return ( 
-            <>
-            <h1>City Explorer</h1>            
+            <>                        
             <Form            
                 getLocationInfo = {this.getLocationInfo}
                 getCityName = {this.getCityName}
@@ -70,6 +78,9 @@ class App extends React.Component {
             />
             <WeatherData 
                 weatherInfo = {this.state.weatherData}
+            />
+            <Movies 
+                moviesInfo = {this.state.moviesData}
             />
             </>
             } 
