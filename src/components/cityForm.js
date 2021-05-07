@@ -14,7 +14,7 @@ class cityForm extends React.Component {
             <br /> 
             <Form onSubmit = {this.props.getLocationInfo} style={{width: '20rem' }}>
             <Form.Group controlId="formBasicEmail" className="text-center">
-                <Form.Control  className="text-center" style={{width: '25rem' }} type="text" placeholder="Enter City Name..."  onChange={this.props.getCityName} />
+                <Form.Control  className="text-center" style={{width: '25rem' }} type="text" placeholder="Enter City Name..."  onChange={this.props.getCityName} required/>
                 <Form.Text className="text-muted">
                Learn About The City You Are Searching For
                 </Form.Text>                                                
