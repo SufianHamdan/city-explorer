@@ -4,7 +4,7 @@ class Info extends Component {
     render() {
         return (
             <>
-                <p>{this.props.name}</p>
+            <div className="text-center"><p>{this.props.name}</p></div>                
             </>
         )
     }
