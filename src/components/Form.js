@@ -6,7 +6,7 @@ class Form extends Component {
             <>
                <form onSubmit = {this.props.getLocationInfo}>
                 <label >Location:</label>
-                <input type="text" onChange={this.props.getCityName}/>
+                <input type="text" onChange={this.props.getCityName} required/>
                 <input type = "submit" value = 'Explore'/>
                 {/* <button onClick={this.props.getLocationInfo}>Explore</button>                 */}
                 </form> 
