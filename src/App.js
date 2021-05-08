@@ -14,8 +14,8 @@ class App extends React.Component {
             data: '',
             searchQuery:'',
             show: false,
-            weatherData: '',
-            moviesData: '',
+            weatherData: [],
+            moviesData: [],
         };
     }
 
