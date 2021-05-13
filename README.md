@@ -13,6 +13,7 @@
 <!-- Provide a detailed description of the application design. What technologies (languages, libraries, etc) you're using, and any other relevant design information. -->
 
 ## Change Log
+
 <!-- Use this area to document the iterative changes made to your application as each feature is successfully implemented. Use time stamps. Here's an example:
 
 01-01-2001 4:59pm - Application now has a fully-functional express server, with a GET route for the location resource. -->
@@ -22,9 +23,9 @@
 
 ---
 
-### Lab 06:
+### Lab 06
 
-Parter: Aseet Hamamreh.
+Parter: Aseel Hamamreh.
 
 Name of feature: Search for a city based on the latitude and longitude of that location then display a map of that city.
 
@@ -55,10 +56,11 @@ Outline functions:
 
 2. Function that target the value that the user entered then pass it to the functiom that sends the GET Request URL.
 
-![WRRC](./assets/lab06)
+![WRRC](/assets/lab06.png)
 
+### Lab 07
 
-### Lab 07: 
+Parter: Abeer Alrafati.
 
 Name of feature: Display the weather info for the city that was searched for
 
@@ -74,14 +76,17 @@ Inputs for the weather info:
 
 1. GET Request: URL
 2. Key: API key
-3. City name: request query 
+3. City name: request query
 
 Outline functions:
 
 1. Function that get the data from the user based on the location name then we pass the location name inside the url.
 
+![WRRC](/assets/lab07draw.png)
 
-### Lab 08: 
+### Lab 08
+
+Parter: Yousef Salem.
 
 Name of feature: Display the weather live info and the movies related to the city name for the city that was searched for
 
@@ -104,3 +109,5 @@ Outline functions:
 1. Function that get the weather info from the user based on the location name then we pass the location name inside the url then request the city name from the server api url.
 
 2. Function that get the movies from the user based on the location name then we pass the location name inside the url then request the city name from the server api url.
+
+![WRRC](/assets/lab08draw.png)

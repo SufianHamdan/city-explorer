@@ -5,41 +5,42 @@ import { Row, Col } from 'react-bootstrap';
 
 
 class movies extends Component {
-    render() {
-        return (
-            <div class="container">
-            
-            {this.props.moviesInfo &&
-            <Row className="justify-content-md-center">
+  render() {
+    return (
+      <div class="container">
+
+        {this.props.moviesInfo &&
+          <Row className="justify-content-md-center">
             <CardColumns>
-            {this.props.moviesInfo.map((value, index) => {
+              {this.props.moviesInfo.map((value, index) => {
                 return (
-                    <Col md="auto">
-                        <Card key={index} style={{width: '18rem' }}>
-                            <Card.Img variant="top" src={value.imgUrl} />
-                            <Card.Body>
-                                <Card.Title>{value.title}</Card.Title>
-                                <Card.Text>
-                                <p>{value.description}</p>
-                                <p>{value.avrVotes}</p>
-                                <p>{value.totVotes}</p>
-                                <p>{value.pop}</p>
-                                <p>{value.rele}</p>
-                                </Card.Text>
-                            </Card.Body>
-                        </Card>
-                    </Col>
-                   
-                )})                
-            }
-            
+                  <Col md="auto">
+                    <Card key={index} style={{ width: '18rem' }}>
+                      <Card.Img variant="top" src={value.imgUrl} />
+                      <Card.Body>
+                        <Card.Title className="text-center">{value.title}</Card.Title>
+                        <Card.Text className="text-center">
+                          <p>{value.description}</p>
+                          <p>{value.avrVotes}</p>
+                          <p>{value.totVotes}</p>
+                          <p>{value.pop}</p>
+                          <p>{value.rele}</p>
+                        </Card.Text>
+                      </Card.Body>
+                    </Card>
+                  </Col>
+
+                );
+              })
+              }
+
             </CardColumns>
-            </Row>
+          </Row>
         }
-        
-      </div>   
-        )
-    }
+
+      </div>
+    );
+  }
 }
 
 export default movies;

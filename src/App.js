@@ -6,88 +6,113 @@ import Form from './components/cityForm';
 import WeatherData from './components/WeatherData';
 import Movies from './components/movies';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Error from './components/eroor';
 
 class App extends React.Component {
-    constructor(props){
-        super(props)
-        this.state = {
-            data: '',
-            searchQuery:'',
-            show: false,
-            weatherData: [],
-            moviesData: [],
-        };
-    }
-
-    getCityName = (event) => {
-        this.setState ({ searchQuery: event.target.value });
-        console.log(this.state.searchQuery);
+  constructor(props) {
+    super(props);
+    this.state = {
+      data: [],
+      searchQuery: '',
+      show: false,
+      weatherData: [],
+      moviesData: [],
+      errorMessage: '',
+      showError: false
     };
+  }
 
-    getLocationInfo = async (event) => {
+  getCityName = (event) => {
+    this.setState({ searchQuery: event.target.value });
+    console.log(this.state.searchQuery);
 
-        event.preventDefault();
-        const url = `https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_MAP_KEY}&q=${this.state.searchQuery}&format=json`;
+  };
 
-        const req = await axios.get(url);
-        this.setState ({
-            data: req.data[0]                               
-        }); 
-        console.log(req.data);
-        console.log(this.state.data);
-     
-        this.getWeatherData();
-        this.getMoviesData();
-    };
+  getLocationInfo = async (event) => {
+    event.preventDefault();
+    this.setState({
+      showError: false
+    });
+    try {
+      const url = `https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_MAP_KEY}&q=${this.state.searchQuery}&format=json`;
 
-    getWeatherData = async () => {
-        const weatherApi = await axios.get(`${process.env.REACT_APP_SERVER}/weather?lat=${this.state.data.lat}&lon=${this.state.data.lon}`);
-        console.log(weatherApi.data);
+      const req = await axios.get(url);
+      this.setState({
+        data: req.data[0],
+        show: true
+      });
+      console.log(req.data);
+      console.log(this.state.data);
 
-        this.setState({
-            weatherData: weatherApi.data,
-            show: true  
-        });
+      this.getWeatherData();
+      this.getMoviesData();
+    } catch (err) {
+      this.setState({
+        errorMessage: 'Please fill out the form with your desired location!',
+        showError: true
+      });
     }
 
-    getMoviesData = async () => {
-        const moviesApi = await axios.get(`${process.env.REACT_APP_SERVER}/movies?searchQuery=${this.state.searchQuery}`);
-        console.log(moviesApi);
+  };
 
-        this.setState ({
-            moviesData: moviesApi.data,
-            show: true
-        });
-    }
+  getWeatherData = async () => {
+    const weatherApi = await axios.get(`${process.env.REACT_APP_SERVER}/weather?lat=${this.state.data.lat}&lon=${this.state.data.lon}`);
+    console.log(weatherApi.data);
 
-    render() { 
-        return ( 
-            <>                        
-            <Form            
-                getLocationInfo = {this.getLocationInfo}
-                getCityName = {this.getCityName}
-            />
-            { this.state.show && 
-            <>
+    this.setState({
+      weatherData: weatherApi.data,
+      show: true
+    });
+  }
+
+  getMoviesData = async () => {
+    const moviesApi = await axios.get(`${process.env.REACT_APP_SERVER}/movies?searchQuery=${this.state.searchQuery}`);
+    console.log(moviesApi);
+
+    this.setState({
+      moviesData: moviesApi.data,
+      show: true
+    });
+  }
+
+  render() {
+    return (
+      <>
+        <Form
+          getLocationInfo={this.getLocationInfo}
+          getCityName={this.getCityName}
+        />
+        {this.state.showError &&
+
+          <Error
+            massError={this.state.errorMessage}
+          />
+
+        }
+
+        {this.state.show &&
+          <>
             <Info
-                name = {this.state.data.display_name}
-            />            
+              name={this.state.data.display_name}
+              latit={this.state.data.lat}
+              longit={this.state.data.lon}
+            />
             <Map
-                loti = {this.state.data.lat}
-                long = {this.state.data.lon}
+              loti={this.state.data.lat}
+              long={this.state.data.lon}
             />
-            <WeatherData 
-                weatherInfo = {this.state.weatherData}
+            <WeatherData
+              weatherInfo={this.state.weatherData}
             />
-            <Movies 
-                moviesInfo = {this.state.moviesData}
+            <Movies
+              moviesInfo={this.state.moviesData}
             />
-            </>
-            } 
-            </>
-         ); 
-    }
+          </>
+        }
+      </>
+    );
+  }
 }
- 
+
 
 export default App;
