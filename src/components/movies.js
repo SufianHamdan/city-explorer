@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import Movie from './MovieComp';
 import CardColumns from 'react-bootstrap/CardDeck';
-import Card from 'react-bootstrap/Card';
+// import Card from 'react-bootstrap/Card';
 import { Row, Col } from 'react-bootstrap';
 
 
@@ -15,21 +16,17 @@ class movies extends Component {
               {this.props.moviesInfo.map((value, index) => {
                 return (
                   <Col md="auto">
-                    <Card key={index} style={{ width: '18rem' }}>
-                      <Card.Img variant="top" src={value.imgUrl} />
-                      <Card.Body>
-                        <Card.Title className="text-center">{value.title}</Card.Title>
-                        <Card.Text className="text-center">
-                          <p>{value.description}</p>
-                          <p>{value.avrVotes}</p>
-                          <p>{value.totVotes}</p>
-                          <p>{value.pop}</p>
-                          <p>{value.rele}</p>
-                        </Card.Text>
-                      </Card.Body>
-                    </Card>
+                    <Movie
+                      key={index}
+                      src={value.imgUrl}
+                      title={value.title}
+                      description = {value.description}
+                      avrVotes = {value.avrVotes}
+                      totVotes = {value.totVotes}
+                      pop = {value.pop}
+                      rele = {value.rele}
+                    />
                   </Col>
-
                 );
               })
               }

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import Weather from './weatherComp';
 import { CardColumns } from 'react-bootstrap';
-import Card from 'react-bootstrap/Card';
+// import Card from 'react-bootstrap/Card';
 import { Row, Col } from 'react-bootstrap';
 
 class WeatherData extends Component {
@@ -16,12 +17,11 @@ class WeatherData extends Component {
               {this.props.weatherInfo.map((value, index) => {
                 return (
                   <Col md="auto">
-                    <Card key={index} style={{ width: '18rem' }}>
-                      <Card.Body>
-                        <Card.Title className="text-center">{value.date}</Card.Title>
-                        <Card.Text className="text-center">{value.description}</Card.Text>
-                      </Card.Body>
-                    </Card>
+                    <Weather
+                      key={index}
+                      date={value.date}
+                      description={value.description}
+                    />
                   </Col>
                 );
               })}
